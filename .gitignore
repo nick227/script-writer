@@ -1,0 +1,9 @@
+main.py
+.env
+private
+.vscode
+node_modules
+gifs
+data
+audio
+

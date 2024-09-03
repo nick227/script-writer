@@ -1,0 +1,161 @@
+body {
+    padding-bottom: 640px;
+}
+
+.row {
+    position: relative;
+}
+
+.row i {
+    z-index: 1;
+    cursor: pointer;
+    background-color: whitesmoke;
+    border-radius: 50%;
+    width: 33px;
+    height: 33px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.row i:nth-of-type(1) {
+}
+
+.row i:nth-of-type(2) {
+}
+
+.improve-btn {
+    position: absolute;
+    bottom: 15px;
+    right: 5px;
+}
+
+.create-btn {
+    position: absolute;
+    top: 15px;
+    right: 5px;
+}
+
+.count-select {
+    position: absolute;
+    top: 15px;
+    right: 42px;
+}
+
+.row i:hover {
+    color: darkblue;
+}
+
+.count-select {
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    position: absolute;
+    padding: 0;
+    background-color: white;
+    color: darkblue;
+    padding: 0;
+    margin: 0;
+    min-height: 0;
+    font-size: 1em;
+    text-align: center;
+    appearance: none; /* hide the default arrow */
+}
+
+.count-select option {
+    background-color: white;
+    color: black;
+}
+
+textarea[name="prompt"] {
+    min-height: 20vh;
+    resize: vertical;
+}
+
+textarea[name="script"] {
+    min-height: 60vh;
+    resize: vertical;
+}
+
+.input-container {
+    white-space: nowrap;
+    min-width: 150px;
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.24;
+    cursor: wait;
+}
+
+.loading {
+    animation: pulse 1s infinite;
+}
+
+.script-container {
+    width: 100%;
+    margin: 10px 0 120px 0;
+}
+
+.script-container>h2 {
+    padding: 10px;
+    background-color: whitesmoke;
+}
+
+.script-container>h3 {
+    padding: 10px;
+    border-bottom: 1px solid black;
+}
+
+.script-container>div {
+    max-height: 500px;
+    overflow-y: auto;
+    line-height: 1.5;
+    padding: 10px;
+}
+
+.fa-wave-square {
+    border-radius: 50%;
+    background-color: white;
+    width: 33px;
+    height: 33px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid whitesmoke;
+    cursor: pointer;
+}
+
+.fa-wave-square:hover {
+    animation: flash 0.5s ease-in-out;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.fa-wave-square:active {
+    animation: none;
+    background-color: whitesmoke;
+}
+
+@keyframes flash {
+    0%, 100% {
+        background-color: white;
+    }
+    50% {
+        background-color: #f0f0f0;
+    }
+}
+
+
+@keyframes pulse {
+    0% {
+        color: rgba(0, 0, 0, 0.24);
+    }
+
+    50% {
+        color: rgba(13, 0, 255, 0.24);
+    }
+
+    100% {
+        color: rgba(29, 197, 57, 0.24);
+    }
+}
