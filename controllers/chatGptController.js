@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 import OpenAI from 'openai';
 import PQueue from 'p-queue';
 import DB from '../db/DB.js';
-import { getScriptSoundEffectsOptions, getScriptHelper, getListOptions, extractOpenAiResponse } from './chatgpt/index.js';
+import { getScriptSpeechLinesOptions, getScriptSoundEffectsOptions, getScriptHelper, getListOptions, extractOpenAiResponse } from './chatgpt/index.js';
 
 dotenv.config();
 
@@ -149,6 +149,29 @@ class ChatGptController {
     async saveScriptResponse(data) {
         const db = new DB('scripts.db');
         await db.insert(data);
+    }
+
+    async getScriptLines(req, res) {
+        const { script } = req.body;
+        const options = getScriptSpeechLinesOptions(script);
+        console.log('options', options);
+        const openai = new OpenAI();
+        const results = await openai.chat.completions.create(options);
+        const resObj = extractOpenAiResponse(results);
+        console.log('resObj', resObj);
+
+        const dbAiResults = new DB('aiResults.db');
+        await dbAiResults.insert({
+            options,
+            results
+        });
+        const linesDb = new DB('script-lines.db');
+        await linesDb.insert({
+            script, resObj
+        });
+
+        res.json(resObj);
+
     }
 }
 

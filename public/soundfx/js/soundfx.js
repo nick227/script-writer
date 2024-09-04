@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('Please enter a script first!');
             return;
         }
+        submitBtn.disabled = true;
 
         try {
             const response = await fetch('/api/chatgpt/soundfx', {
@@ -29,6 +30,9 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error:', error);
             outputDiv.textContent = 'An error occurred while generating sound effects.';
         }
+        finally {
+            submitBtn.disabled = false;
+        }
     });
 });
 
@@ -36,8 +40,12 @@ async function loadSoundFxData() {
     try {
         const response = await fetch('/api/soundfx');
         const data = await response.json();
-        const outputDiv = document.querySelector('.output');
-        outputDiv.textContent = JSON.stringify(data, null, 2);
+        const outputDiv = document.querySelector('#output');
+        if (data.length > 0) {
+        
+            outputDiv.innerHTML = JSON.stringify(data, null, 2);
+        }
+
     } catch (error) {
         console.error('Error:', error);
     }

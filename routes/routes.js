@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import BaseController from '../controllers/baseController.js';
 import { ChatGptController } from '../controllers/chatGptController.js';
-import ChatGptLinesExtractController from '../controllers/chatGptLinesExtractController.js';
 import dotenv from 'dotenv';
 import DB from '../db/DB.js';
 import path from 'path';
@@ -48,8 +47,8 @@ router.post('/chatgpt/soundfx', (req, res, next) => {
 });
 
 router.post('/chatgpt/lines', (req, res, next) => {
-    const chatgptController = new ChatGptLinesExtractController();
-    chatgptController.getChatGPTList(req, res);
+    const chatgptController = new ChatGptController();
+    chatgptController.getScriptLines(req, res);
 });
 
 router.get(`/script/`, (req, res, next) => {
