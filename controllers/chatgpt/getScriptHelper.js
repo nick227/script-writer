@@ -859,6 +859,164 @@ export default function getScriptHelper(prompt, key, wordCount = 4000, script = 
              }]
     };
 
+    helpers.comedySketch = {
+        model: openAiModel4,
+        messages: [{
+            "role": "assistant", "content": `
+            INT. HOUSE - DAY
+
+CHRIS enters, looking around.
+
+CHRIS
+Hey Mom, have you seen my phone?
+
+MOM and MISS CLIY turn to look at CHRIS.
+
+MOM
+Well, look who crawled out of his cave.
+
+MISS CLIY
+Is that who I think it is?
+
+CHRIS
+(confused)
+Uh... he doesn't recognize me.
+
+MISS CLIY
+It's Clian. Miss Cliy. I used to change your diapers when you were a baby.
+
+CHRIS
+Oh, okay. Uh, sorry, I don't remember you.
+
+MISS CLIY
+You had the smallest little baby penis.
+
+MOM
+(embarrassed)
+I'm sorry, I mean it was small even for a baby. It's true. We were worried, but I said, "He'll grow."
+
+MISS CLIY
+He did. You used to eat rolls of quarters.
+
+CHRIS
+I didn't do that. I would have remembered that.
+
+MISS CLIY
+Remember? Nickels and dimes. You'd eat them with your butt.
+
+MOM
+And I would try to hide them. I'd say, "No, no, no!" But you were a climber. You'd climb up on the drawer and eat 'em with your butt.
+
+CHRIS
+(bewildered)
+Wow. Yeah, no, I didn't do that. I've actually never seen you before in my life.
+
+MISS CLIY
+You remember Mr. Tubbins, yes? He was your best friend. Every time you lost him, you'd scream your little head off like a psychopath.
+
+CHRIS
+Is that like a stuffed animal?
+
+MISS CLIY
+It was a burger.
+
+CHRIS
+Sorry, you said a burger?
+
+MOM
+You would not let us throw him away.
+
+CHRIS
+(to MOM)
+Oh, you're lying. I remember. He's a liar, Mom.
+
+MOM
+I think I might still have him somewhere.
+
+CHRIS
+(to MISS CLIY)
+Who are you?
+
+MISS CLIY continues with more outrageous claims. CHRIS becomes increasingly uncomfortable.
+
+CHRIS
+(trying to leave)
+Well, uh, I got to go. Um, it was really great seeing you again.
+
+MISS CLIY
+(intensely)
+Before your mind was aware, I witnessed you, a stinking little homunculus, naked and laid bare, babbling and bottomless, ready to be molded like a little lump of clay. You owe me this. You owe me this one little interaction. It's mine by divine right and because I was in a book club with your mom.
+
+CHRIS
+(uncomfortable)
+I'm sorry. Somehow, deep within that little bug brain, you know me.
+
+MOM
+This has been so fun!
+
+MISS CLIY
+Yes, likewise! Oh, we have to do this again sometime, please!
+
+MOM
+I love it! Let me get your email.
+
+MISS CLIY
+Okay, let me just get my phone. It's in here somewhere.
+
+MISS CLIY rummages through her purse. A burger falls out.
+
+CHRIS stares at the burger, suddenly hit with flashbacks.
+
+CHRIS
+(in a trance-like state)
+Mr. Tubbins... you're my best friend, Mr. Tubbins... I love you, Miss Cliy... I'll never forget you, Miss Cliy... Where's my bendy straw? I'm thirsty... Quarters for Chris's butt, yum yum yum... More quarters for my butt... Please don't throw him away, that's a person, not a burger...
+
+CHRIS snaps out of it, looking horrified.
+
+CHRIS
+(muttering to himself)
+Look, I'm just as tall as this bug...
+
+CHRIS hurriedly exits, leaving MOM and MISS CLIY looking bemused.
+            `
+        }, {
+            "role": "user", "content": `${prompt}`
+        },
+        {
+            "role": "system", "content": `
+                Create a comedy sketch based on the user's prompt.
+                Guidelines:
+                - Be strange and creative
+                - Use obsure and unusual characters
+                - Use absolute minimum stage direction
+                - At least ${wordCount} words long
+            `
+        }],
+        max_tokens: maxTokens4,
+        tool_choice: { "type": "function", "function": { "name": "write_comedy_sketch" } },
+        tools: [{
+            "type": "function",
+            "function": {
+                "name": "write_comedy_sketch",
+                "description": `Generates a comedy sketch based on the ${prompt}.`,
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "title": {
+                            "type": "string",
+                            "description": "The title of the comedy sketch"
+                        },
+                        "script": {
+                            "type": "string",
+                            "description": "The entire script of the comedy sketch, including all dialogue, lyrics, and stage directions"
+                        }
+                    },
+                    "required": ["title", "script"]
+                    }
+                }
+            }]
+    };
+
     helpers.interrupt = {
         model: openAiModel4,
         messages: [{
